@@ -1,0 +1,6 @@
+{
+  "name": "brig-test",
+  "dependencies": {
+    "@brigadecore/brigadier": "^2.5.0"
+  }
+}

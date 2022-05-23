@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=https://schemas.brigade.sh/schemas-v2/project.json
+apiVersion: brigade.sh/v2
+kind: Project
+metadata:
+  id: brig-test
+description: My new Brigade project
+spec:
+  ## Subscribe below to any events that should trigger your script.
+  ## The example depicts a subscription to "exec" events 
+  ## originating from the Brigade CLI. 
+  eventSubscriptions:
+  - source: brigade.sh/cloudevents
+    types:
+    - cloudevent
+    qualifiers:
+      source: "/subscriptions/8ec81d93-7715-4cec-8dcf-e07583d8a24a/resourceGroups/test/providers/Microsoft.Storage/storageAccounts/brigtest2"
+      type: "Microsoft.Storage.BlobCreated"
+  workerTemplate:
+    logLevel: DEBUG
+    ## Your brigade.ts script will be loaded from the 
+    ## following git repository by default, but note that individual 
+    ## events CAN override these details. The Brigade GitHub Gateway, 
+    ## for instance, overrides these details for relevant events so 
+    ## the events themselves reference applicable branches, tags, pull 
+    ## requests, etc.
+    git:
+      cloneURL: https://github.com/devigned/brig-test.git
